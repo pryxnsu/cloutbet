@@ -67,10 +67,10 @@ export default function AppSidebar() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex size-8 items-center justify-center overflow-hidden rounded-md border">
-                  {true ? (
+                  {session?.user?.avatar ? (
                     <Image
-                      src={session?.user?.avatar || ''}
-                      alt={session?.user?.name || ''}
+                      src={session.user.avatar}
+                      alt={session.user.name || 'User avatar'}
                       className="h-full w-full object-fill"
                       width={24}
                       height={24}
