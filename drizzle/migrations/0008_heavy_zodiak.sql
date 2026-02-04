@@ -1,0 +1,1 @@
+ALTER TABLE "prediction" ADD COLUMN "participant_count" integer DEFAULT 0;

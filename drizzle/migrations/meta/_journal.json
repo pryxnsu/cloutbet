@@ -57,6 +57,13 @@
       "when": 1770228313167,
       "tag": "0007_flat_famine",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1770228362680,
+      "tag": "0008_heavy_zodiak",
+      "breakpoints": true
     }
   ]
 }

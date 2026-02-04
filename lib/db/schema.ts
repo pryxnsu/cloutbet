@@ -1,5 +1,5 @@
 import { InferSelectModel } from 'drizzle-orm';
-import { pgTable, text, timestamp, varchar, index, uniqueIndex, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, varchar, index, uniqueIndex, pgEnum, integer } from 'drizzle-orm/pg-core';
 import { v7 as uuidv7 } from 'uuid';
 
 export const betSideEnum = pgEnum('bet_side', ['in', 'out']);
@@ -53,6 +53,7 @@ export const prediction = pgTable(
     status: varchar('status', { enum: ['open', 'closed'] })
       .notNull()
       .default('open'),
+    participantCount: integer('participant_count').default(0),
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at')
       .notNull()
