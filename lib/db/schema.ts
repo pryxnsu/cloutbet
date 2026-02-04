@@ -59,7 +59,7 @@ export const prediction = pgTable(
       .defaultNow()
       .$onUpdate(() => new Date()),
   },
-  t => [index('prediction_user_id_user_id_idx').on(t.userId)]
+  t => [index('prediction_user_id_idx').on(t.userId), index('prediction_expiry_idx').on(t.expiry)]
 );
 
 export const bet = pgTable(
