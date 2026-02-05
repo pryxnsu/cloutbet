@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'CloutBet | The Social Prediction center for Tech Twitter',
-  description: '',
+  title: 'CloutBet | The Social Prediction Center for Tech Twitter',
+  description:
+    'Bet on tweets, predict viral moments, and earn clout. Join the ultimate social prediction platform for Tech Twitter.',
 };
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistMono.variable} ${geistSans.variable} antialiased`}>
         <Toaster position="top-center" />
         {children}
       </body>
