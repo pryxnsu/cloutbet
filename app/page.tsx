@@ -19,8 +19,7 @@ export default function Home() {
 
           <div className="relative mx-auto max-w-5xl text-center">
             <div className="bg-secondary border-border/40 mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-2">
-              <span className="text-muted-foreground text-xs font-semibold">NEW</span>
-              <span className="text-muted-foreground text-xs">Real-time tech market insights</span>
+              <span className="text-muted-foreground text-xs">Predict tweets before they go viral</span>
               <ArrowRight className="text-muted-foreground h-3 w-3" />
             </div>
 
