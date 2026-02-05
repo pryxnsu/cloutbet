@@ -1,4 +1,4 @@
-import { InferSelectModel } from 'drizzle-orm';
+import { desc, InferSelectModel } from 'drizzle-orm';
 import { pgTable, text, timestamp, varchar, index, pgEnum, integer } from 'drizzle-orm/pg-core';
 import { v7 as uuidv7 } from 'uuid';
 
@@ -63,7 +63,7 @@ export const prediction = pgTable(
   t => [
     index('prediction_user_id_idx').on(t.userId),
     index('prediction_expiry_idx').on(t.expiry),
-    index('prediction_created_at_idx').on(t.createdAt),
+    index('prediction_created_at_idx').on(desc(t.createdAt)),
   ]
 );
 
@@ -83,6 +83,7 @@ export const bet = pgTable(
     createdAt: timestamp('created_at').notNull().defaultNow(),
   },
   t => [
+    index('bet_user_prediction_idx').on(t.userId, t.predictionId),
     index('bet_prediction_id_idx').on(t.predictionId),
     index('bet_user_created_idx').on(t.userId, t.createdAt),
   ]

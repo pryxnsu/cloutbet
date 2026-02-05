@@ -1,0 +1,1 @@
+CREATE INDEX "bet_user_prediction_idx" ON "bet" USING btree ("user_id","prediction_id");
