@@ -1,0 +1,1 @@
+CREATE INDEX "bet_created_at_idx" ON "bet" USING btree ("created_at");

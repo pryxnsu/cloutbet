@@ -1,5 +1,5 @@
 import { InferSelectModel } from 'drizzle-orm';
-import { pgTable, text, timestamp, varchar, index, uniqueIndex, pgEnum, integer } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, varchar, index, pgEnum, integer } from 'drizzle-orm/pg-core';
 import { v7 as uuidv7 } from 'uuid';
 
 export const betSideEnum = pgEnum('bet_side', ['in', 'out']);
@@ -84,8 +84,7 @@ export const bet = pgTable(
   },
   t => [
     index('bet_prediction_id_idx').on(t.predictionId),
-    index('bet_user_id_idx').on(t.userId),
-    uniqueIndex('bet_unique_user_prediction').on(t.predictionId, t.userId),
+    index('bet_user_created_idx').on(t.userId, t.createdAt),
   ]
 );
 

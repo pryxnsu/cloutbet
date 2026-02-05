@@ -64,6 +64,20 @@
       "when": 1770228362680,
       "tag": "0008_heavy_zodiak",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1770311721183,
+      "tag": "0009_pale_jackpot",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1770312590272,
+      "tag": "0010_wakeful_the_liberteens",
+      "breakpoints": true
     }
   ]
 }
