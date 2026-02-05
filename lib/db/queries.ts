@@ -157,3 +157,22 @@ export async function getUserBetsForPredictions(userId: string, predictionIds: s
     throw new Error('Failed to get user bets');
   }
 }
+
+export async function getUserBids(userId: string) {
+  try {
+    return await db.select({
+        betId: bet.id,
+        side: bet.side,
+        title: prediction.title,
+        timestamp: bet.createdAt
+    })
+    .from(bet)
+    .where(eq(bet.userId, userId))
+    .leftJoin(prediction, eq(bet.predictionId, prediction.id))
+    .orderBy(desc(bet.createdAt))
+    .limit(9);
+  } catch (err) {
+    console.error('[DB Error] Failed to get user bets', err);
+    throw new Error('Failed to get user bets');
+  }
+}
