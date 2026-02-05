@@ -1,6 +1,7 @@
 'use client';
 
 import { SessionProvider } from 'next-auth/react';
+import Activity from '@/components/Activity';
 import Sidebar from '@/components/Sidebar';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@/components/ui/separator';
@@ -17,6 +18,9 @@ export default function MarketLayout({ children }: { children: React.ReactNode }
             {children}
           </div>
         </main>
+        <aside className="fixed top-0 right-0 z-40 hidden h-screen w-[31%] overflow-auto border-l bg-white lg:block">
+          <Activity />
+        </aside>
       </SidebarProvider>
     </SessionProvider>
   );
