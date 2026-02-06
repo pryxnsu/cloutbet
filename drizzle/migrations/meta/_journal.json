@@ -106,6 +106,13 @@
       "when": 1770318099744,
       "tag": "0014_complete_tag",
       "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1770319633475,
+      "tag": "0015_safe_stone_men",
+      "breakpoints": true
     }
   ]
 }

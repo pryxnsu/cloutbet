@@ -89,7 +89,23 @@ export const bet = pgTable(
   ]
 );
 
+export const feedback = pgTable(
+  'feedback',
+  {
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => uuidv7()),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    content: text('content').notNull(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+  },
+  t => [index('feedback_user_id_idx').on(t.userId), index('feedback_created_at_idx').on(desc(t.createdAt))]
+);
+
 export type User = InferSelectModel<typeof user>;
 export type Account = InferSelectModel<typeof account>;
 export type Prediction = InferSelectModel<typeof prediction>;
 export type Bet = InferSelectModel<typeof bet>;
+export type Feedback = InferSelectModel<typeof feedback>;
