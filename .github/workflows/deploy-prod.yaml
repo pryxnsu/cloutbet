@@ -1,0 +1,27 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy-to-production:
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{secrets.EC2_HOST}}
+          username: ubuntu 
+          key: ${{secrets.EC2_SSH_KEY}}
+          script: |
+            cd /home/ubuntu/cloutbet
+            git fetch origin
+            git reset --hard origin/main
+            docker compose up -d --build 
+          
+        
