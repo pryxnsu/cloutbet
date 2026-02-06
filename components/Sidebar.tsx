@@ -4,7 +4,13 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Settings, MessageSquare, User as UserIcon, Trophy, Zap } from 'lucide-react';
+import { Settings, MessageSquare, User as UserIcon, Trophy, Zap, LogOut, MoreHorizontal } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -18,7 +24,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
+import { Button } from './ui/button';
 
 const mainItems = [
   {
@@ -80,6 +87,25 @@ export default function AppSidebar() {
                   )}
                 </div>
               </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="flex size-8 items-center justify-center rounded-md text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600"
+                  >
+                    <MoreHorizontal className="size-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-40">
+                  <DropdownMenuItem
+                    onClick={() => signOut({ callbackUrl: '/login' })}
+                    className="cursor-pointer text-red-600 focus:text-red-600"
+                  >
+                    <LogOut className="mr-2 size-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             <div className="flex flex-col gap-1">
@@ -90,7 +116,17 @@ export default function AppSidebar() {
         ) : (
           <div className="flex flex-col items-center gap-4 py-2">
             <div className="flex size-8 items-center justify-center overflow-hidden rounded-lg border">
-              <UserIcon className="size-5 text-black" />
+              {session?.user?.avatar ? (
+                <Image
+                  src={session.user.avatar}
+                  alt={session.user.name || 'User avatar'}
+                  className="h-full w-full object-fill"
+                  width={24}
+                  height={24}
+                />
+              ) : (
+                <UserIcon className="size-6 text-zinc-400" />
+              )}
             </div>
           </div>
         )}
