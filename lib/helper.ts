@@ -10,3 +10,12 @@ export function betsToMap(bets: { predictionId: string; side: 'in' | 'out' }[]):
   }
   return map;
 }
+
+export function formatDate(date: string | Date): string {
+  return new Date(date).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+}

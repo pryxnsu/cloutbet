@@ -5,18 +5,9 @@ import { Users, Clock, TrendingUp, TrendingDown, Check } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { PredictionCardProps } from '@/types';
-import { extractTweetId } from '@/lib/helper';
+import { extractTweetId, formatDate } from '@/lib/helper';
 import TweetCard from './TweetCard';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-
-function formatDate(date: string | Date): string {
-  return new Date(date).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-}
 
 function PredictionCard({
   id,
@@ -75,9 +66,8 @@ function PredictionCard({
         <div className="flex gap-3">
           {userBetSide ? (
             <div
-              className={`flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium ${
-                userBetSide === 'in' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
-              }`}
+              className={`flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium ${userBetSide === 'in' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
+                }`}
             >
               <Check className="h-4 w-4" />
               You predicted <span className="font-semibold">{userBetSide === 'in' ? 'Will Hit' : 'Will Flop'}</span>
