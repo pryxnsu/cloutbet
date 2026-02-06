@@ -13,6 +13,7 @@ import { api, ApiResponse } from '@/lib/axios';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 import { PredictionProp } from '@/types';
+import { useSession } from 'next-auth/react';
 
 const durations = [
   { id: '1h', label: '1 Hour' },
@@ -40,6 +41,7 @@ interface AddPostProps {
 }
 
 export default function AddPost({ onSuccess, updatePredictions }: AddPostProps) {
+  const { status } = useSession();
   const [isCreating, setIsCreating] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -51,6 +53,10 @@ export default function AddPost({ onSuccess, updatePredictions }: AddPostProps) 
   });
 
   const onSubmit = async (values: FormValues) => {
+    if (status !== 'authenticated') {
+      toast.error('Please sign in to submit prediction');
+      return;
+    }
     setIsCreating(true);
     try {
       const response = await api.post<ApiResponse<PredictionProp>>('/api/predictions', values);
