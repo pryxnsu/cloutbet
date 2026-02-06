@@ -16,7 +16,7 @@ export default function Page() {
         </div>
 
         <Button
-          onClick={() => signIn('twitter', { callbackUrl: '/' })}
+          onClick={() => signIn('twitter', { callbackUrl: '/feed' })}
           className="group h-12 w-full cursor-pointer bg-transparent px-6 text-base font-medium transition-all duration-200"
           variant="outline"
         >
