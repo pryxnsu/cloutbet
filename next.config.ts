@@ -1,6 +1,15 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error'],
+          }
+        : false,
+  },
+  devIndicators: process.env.NODE_ENV === 'production' ? false : { position: 'bottom-left' },
   images: {
     remotePatterns: [
       {
@@ -13,6 +22,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  output: 'standalone',
 };
 
 export default nextConfig;
