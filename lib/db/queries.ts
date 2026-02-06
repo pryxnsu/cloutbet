@@ -1,6 +1,6 @@
 import { and, desc, eq, gt, inArray, sql } from 'drizzle-orm';
 import { db } from '.';
-import { account, bet, prediction, user } from './schema';
+import { account, bet, feedback, prediction, user } from './schema';
 
 export async function createUser(name: string, username: string, avatar: string) {
   try {
@@ -160,19 +160,56 @@ export async function getUserBetsForPredictions(userId: string, predictionIds: s
 
 export async function getUserBids(userId: string) {
   try {
-    return await db.select({
+    return await db
+      .select({
         betId: bet.id,
         side: bet.side,
         title: prediction.title,
-        timestamp: bet.createdAt
-    })
-    .from(bet)
-    .where(eq(bet.userId, userId))
-    .leftJoin(prediction, eq(bet.predictionId, prediction.id))
-    .orderBy(desc(bet.createdAt))
-    .limit(9);
+        timestamp: bet.createdAt,
+      })
+      .from(bet)
+      .where(eq(bet.userId, userId))
+      .leftJoin(prediction, eq(bet.predictionId, prediction.id))
+      .orderBy(desc(bet.createdAt))
+      .limit(9);
   } catch (err) {
     console.error('[DB Error] Failed to get user bets', err);
     throw new Error('Failed to get user bets');
+  }
+}
+
+export async function createFeedback(userId: string, content: string) {
+  try {
+    const [f] = await db
+      .insert(feedback)
+      .values({
+        userId,
+        content,
+      })
+      .returning();
+    return f;
+  } catch (err) {
+    console.error('[DB Error] Failed to create feedback', err);
+    throw new Error('Failed to submit feedback');
+  }
+}
+
+export async function getAllFeedback() {
+  try {
+    return await db
+      .select({
+        id: feedback.id,
+        content: feedback.content,
+        createdAt: feedback.createdAt,
+        name: user.name,
+        avatar: user.avatar,
+        username: user.username,
+      })
+      .from(feedback)
+      .leftJoin(user, eq(feedback.userId, user.id))
+      .orderBy(desc(feedback.createdAt));
+  } catch (err) {
+    console.error('[DB Error] Failed to get feedback', err);
+    throw new Error('Failed to get feedback');
   }
 }
