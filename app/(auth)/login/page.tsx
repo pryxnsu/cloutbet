@@ -10,9 +10,11 @@ export default function Page() {
         <div className="from-muted-foreground/20 absolute top-0 right-0 h-px w-px bg-linear-to-br to-transparent opacity-40" />
       </div>
 
-      <div className="relative z-10 flex w-full max-w-sm flex-col items-center justify-center">
+      <div className="relative z-10 flex w-full max-w-sm flex-col items-center justify-center px-6 sm:px-0">
         <div className="mb-6 text-center">
-          <h1 className="text-foreground text-5xl font-bold tracking-tight text-balance">Login to CloutBet</h1>
+          <h1 className="text-foreground text-3xl font-bold tracking-tight text-balance md:text-5xl">
+            Login to CloutBet
+          </h1>
         </div>
 
         <Button
