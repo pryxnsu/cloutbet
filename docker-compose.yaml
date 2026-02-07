@@ -2,25 +2,12 @@ name: cloutbet
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     env_file:
       - .env
     container_name: cloutbet
     ports:
       - 3000:3000
-    depends_on:
-      - db
     restart: always
-
-  db:
-    image: postgres:18-alpine
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: always
-
-volumes:
-  postgres_data:
